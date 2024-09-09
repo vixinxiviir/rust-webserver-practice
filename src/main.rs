@@ -3,10 +3,8 @@ use std::
     fs,
     io::{prelude::*, BufReader},
     net::{TcpListener, TcpStream},
-    thread,
-    time::Duration,
-    sync::mpsc,
 };
+
 use rust_webserver_practice::ThreadPool;
 
 
@@ -38,7 +36,7 @@ fn main()
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
     let thread_pool = ThreadPool::new(4);
 
-    for stream in listener.incoming() 
+    for stream in listener.incoming()
     {
         let stream = stream.unwrap();
         thread_pool.execute(|| 
@@ -47,5 +45,5 @@ fn main()
         });
        
     }
-    
+    println!("Shutting down...");
 }
